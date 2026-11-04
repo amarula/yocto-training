@@ -39,3 +39,7 @@ src: ./slides/08-bitbake.md
 ---
 src: ./slides/09-recipes.md
 ---
+
+---
+src: ./slides/10-classes.md
+---
