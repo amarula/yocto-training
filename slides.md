@@ -35,3 +35,7 @@ src: ./slides/07-variables-packages.md
 ---
 src: ./slides/08-bitbake.md
 ---
+
+---
+src: ./slides/09-recipes.md
+---
