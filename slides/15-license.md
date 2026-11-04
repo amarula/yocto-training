@@ -140,10 +140,7 @@ Yocto How handle complex release
 In order to handle releases that include multiple layers we need a way to organize them properly:
 
 - KAS [https://github.com/siemens/kas](https://github.com/siemens/kas) (Siemens)
-- repo [https://gerrit.googlesource.com/git-repo](https://gerrit.googlesource.com/git-repo) (Google)
 
-The first project uses a YAML configuration file to download all the needed software in order to handle complex releases.
+KAS uses a YAML configuration file to download all the needed software and to handle complex releases.
 
-The second uses an XML-style manifest to download the components.
-
-We need to be able to tag the project and to easily download it. Other ways can be used, but the latter are the most commonly used now.
+We need to be able to tag the project and to easily download it. KAS lockfiles and tagged repositories provide reproducible releases; the next chapter shows the details.

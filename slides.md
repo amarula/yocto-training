@@ -69,9 +69,5 @@ src: ./slides/16-kas.md
 ---
 
 ---
-src: ./slides/17-repo.md
----
-
----
-src: ./slides/18-closing.md
+src: ./slides/17-closing.md
 ---
