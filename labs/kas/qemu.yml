@@ -1,0 +1,8 @@
+header:
+  version: 23
+  includes:
+    - base.yml
+
+machine: qemux86-64
+distro: nodistro
+target: training-image

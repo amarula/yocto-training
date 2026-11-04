@@ -1,0 +1,4 @@
+# Minimal training image: a single ext4 root filesystem.
+# The board BSP may replace this with a layout that includes the bootloader
+# and a boot partition.
+part / --source rootfs --fstype=ext4 --label root --align 4096

@@ -1,0 +1,32 @@
+header:
+  version: 23
+
+repos:
+  bitbake:
+    url: https://git.openembedded.org/bitbake
+    branch: "2.18"
+    layers: {}
+
+  core:
+    url: https://git.openembedded.org/openembedded-core
+    branch: wrynose
+    layers:
+      meta:
+
+  meta-openembedded:
+    url: https://github.com/openembedded/meta-openembedded.git
+    branch: wrynose
+    layers:
+      meta-oe:
+      meta-python:
+      meta-networking:
+      meta-multimedia:
+
+  meta-training:
+    path: ../meta-training
+    layers:
+      .:
+
+local_conf_header:
+  training: |
+    EXTRA_IMAGE_FEATURES = "allow-empty-password empty-root-password allow-root-login serial-autologin-root"

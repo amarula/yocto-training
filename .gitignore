@@ -9,3 +9,7 @@ components.d.ts
 *.pdf
 *.png
 !public/images/**
+labs/work/
+labs/build/
+labs/downloads/
+labs/sstate-cache/
