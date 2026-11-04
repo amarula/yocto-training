@@ -1,0 +1,16 @@
+/*
+ * Local overrides for the Amarula theme.
+ *
+ * The theme sets the code font to 9px/13px. That is comfortable for very
+ * dense code, but too small for normal code slides. Use 10px/14px by default
+ * and keep the original 9px/13px for slides marked with `class: dense`.
+ */
+html:root {
+  --slidev-code-font-size: 10px;
+  --slidev-code-line-height: 14px;
+}
+
+.slidev-page.dense {
+  --slidev-code-font-size: 9px;
+  --slidev-code-line-height: 13px;
+}
