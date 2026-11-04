@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "description": "Yocto Training slides",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "slidev slides.md",
     "build": "slidev build slides.md",

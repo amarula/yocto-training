@@ -7,18 +7,40 @@ BitBake, OpenEmbedded-Core, meta-openembedded and the training layer, generate
 ## Prerequisites
 
 - Linux host (Ubuntu 24.04 recommended)
-- Python 3.9+, `pipx`, `git`
+- Python 3.9+, `pipx` (or a Python virtual environment) and `git`
 - At least 50 GB free disk space and 8 GB RAM
 - Network access for the first build
 - On Ubuntu 24.04+, BitBake needs unprivileged user namespaces. If the build
   fails with an AppArmor/user-namespace error, use `kas-container` or enable
   unprivileged user namespaces on the host.
 
+## KAS installation
+
+Install KAS with `pipx` or in a Python virtual environment:
+
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+pip install kas==5.5
+kas --version
+```
+
+Or:
+
+```bash
+pipx install kas
+```
+
+Keep the environment active in the shell where you run `./kas.sh`.
+
+The virtual environment only provides the **KAS CLI**. BitBake itself runs
+with the host Python and host tools; use `kas-container` if you want a fully
+isolated build environment.
+
 ## Quick start
 
 ```bash
 cd labs
-pipx install kas
 ./kas.sh build kas/qemu.yml
 ./kas.sh shell kas/qemu.yml -c 'runqemu qemux86-64 training-image'
 ```
@@ -67,7 +89,8 @@ the real board.
 | `exercises/08-kernel-fragment.md` | Add a kernel configuration fragment |
 | `exercises/09-sdk.md` | Build and use the SDK/eSDK |
 | `exercises/10-systemd-service.md` | Add a systemd service |
-| `exercises/11-capstone.md` | Build a complete custom image (planned) |
+| `exercises/11-debugging.md` | Debug build and runtime failures |
+| `exercises/12-capstone.md` | Build a complete custom image (planned) |
 
 ## Validate a completed lab
 
