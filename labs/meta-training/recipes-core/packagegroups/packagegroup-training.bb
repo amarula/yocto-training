@@ -4,4 +4,4 @@ LICENSE = "MIT"
 
 inherit packagegroup
 
-RDEPENDS:${PN} = "hello training-info"
+RDEPENDS:${PN} = "hello training-info training-service"

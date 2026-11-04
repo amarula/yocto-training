@@ -66,7 +66,7 @@ the real board.
 | `exercises/07-image-and-wic.md` | Customize the image and the WIC layout |
 | `exercises/08-kernel-fragment.md` | Add a kernel configuration fragment |
 | `exercises/09-sdk.md` | Build and use the SDK/eSDK (planned) |
-| `exercises/10-systemd-service.md` | Add a systemd service (planned) |
+| `exercises/10-systemd-service.md` | Add a systemd service |
 | `exercises/11-capstone.md` | Build a complete custom image (planned) |
 
 ## Validate a completed lab

@@ -32,6 +32,11 @@ grep -q '^training-info ' "$manifest" || {
     exit 1
 }
 
+grep -q '^training-service ' "$manifest" || {
+    echo "FAIL: training-service package is missing from $manifest" >&2
+    exit 1
+}
+
 grep -q 'meta-training' "$build/conf/bblayers.conf" || {
     echo "FAIL: meta-training is missing from bblayers.conf" >&2
     exit 1
@@ -39,5 +44,5 @@ grep -q 'meta-training' "$build/conf/bblayers.conf" || {
 
 echo "Lab check OK"
 echo "  manifest: $manifest"
-echo "  packages: hello, training-info"
+echo "  packages: hello, training-info, training-service"
 echo "  layer:    meta-training"

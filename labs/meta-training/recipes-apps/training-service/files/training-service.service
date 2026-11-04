@@ -1,0 +1,14 @@
+[Unit]
+Description=Yocto training service
+After=network.target
+
+[Service]
+Type=simple
+User=training
+Group=training
+StateDirectory=training
+ExecStart=/usr/bin/training-service
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
