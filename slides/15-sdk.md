@@ -1,4 +1,13 @@
 ---
+layout: center
+class: text-center
+---
+
+# Yocto
+
+## SDK
+
+---
 layout: default
 ---
 
@@ -116,3 +125,162 @@ An easy way to add packages to the generated toolchain is to create `meta-toolch
 TOOLCHAIN_HOST_TASK:append = " nativesdk-curl"
 TOOLCHAIN_TARGET_TASK:append = " openssl-dev"
 ```
+
+---
+layout: default
+---
+
+::title::
+
+Standard SDK workflow
+
+::body::
+
+```bash
+# Build the SDK
+bitbake -c populate_sdk training-image
+
+# Install it into a chosen directory
+./tmp/deploy/sdk/<sdk>-toolchain-<version>.sh -d /opt/yocto-sdk
+
+# Use the cross-toolchain
+source /opt/yocto-sdk/environment-setup-*
+$CC hello.c -o hello
+file hello
+```
+
+- The environment exports `CC`, `CXX`, `CROSS_COMPILE`, `SDKTARGETSYSROOT` and `PKG_CONFIG_SYSROOT_DIR`.
+- Use `$CC` (and `$CXX`) rather than the host compiler.
+- `file hello` should report the target architecture.
+
+---
+layout: default
+---
+
+::title::
+
+SDK installation and relocation
+
+::body::
+
+- The installer accepts `-d <dir>` and the SDK is relocatable.
+- `environment-setup-*` sets the cross-toolchain, sysroot and pkg-config paths.
+- Key variables:
+  - `SDKTARGETSYSROOT` — target sysroot
+  - `TOOLCHAIN_OUTPUTNAME` — installer name
+  - `SDK_TITLE`, `SDK_VERSION` — metadata shown by the installer
+- The SDK is self-contained; do not mix host and target headers or libraries.
+- Use the SDK's `sysroots/` to inspect target libraries.
+
+---
+layout: default
+---
+
+::title::
+
+Extensible SDK (eSDK)
+
+::body::
+
+```bash
+bitbake -c populate_sdk_ext training-image
+./tmp/deploy/sdk/<esdk>.sh -d /opt/yocto-esdk
+source /opt/yocto-esdk/environment-setup-*
+devtool --help
+```
+
+- The eSDK includes BitBake, `devtool`, metadata and a locked sysroot.
+- Developers can add, modify and build recipes without the full Yocto tree.
+- `devtool sdk-install <package>` adds a build dependency to the eSDK.
+- `devtool sdk-update` updates the eSDK from `SDK_UPDATE_URL`.
+
+---
+layout: default
+---
+
+::title::
+
+eSDK configuration
+
+::body::
+
+```text
+SDK_EXT_TYPE = "full"          # or "minimal"
+SDK_INCLUDE_TOOLCHAIN = "1"
+SDK_INCLUDE_PKGDATA = "0"
+SDK_INCLUDE_NATIVESDK = "0"
+SDK_INCLUDE_BUILDTOOLS = "1"
+SDK_UPDATE_URL = "https://example.com/sdk-updates"
+```
+
+- `full` includes the toolchain and package data; `minimal` is smaller and relies on `devtool sdk-install`.
+- `ESDK_LOCALCONF_ALLOW` and `ESDK_LOCALCONF_REMOVE` control which `local.conf` variables are kept.
+- `ESDK_CLASS_INHERIT_DISABLE` (default `buildhistory`) controls inherited classes.
+- Keep the eSDK, its lockfile and the image's shared state consistent.
+
+---
+layout: default
+---
+
+::title::
+
+devtool ide-sdk
+
+::body::
+
+```bash
+devtool modify hello
+devtool ide-sdk hello training-image
+```
+
+- `modified` mode: workspace source, target image and debug configuration.
+- `shared` mode: cross-toolchain and shared sysroot.
+- `-i code` (default) or `-i none`.
+- `-t user@host` configures remote debugging on a running target.
+- Requires an image recipe for the target and, for C/C++, a debugger/gdbserver.
+
+---
+layout: default
+---
+
+::title::
+
+Hands-on lab: SDK
+
+::body::
+
+- Lab: `labs/exercises/09-sdk.md`
+- Build and install the standard SDK:
+
+```bash
+cd labs
+./kas.sh shell kas/qemu.yml -c 'bitbake -c populate_sdk training-image'
+ls build/tmp/deploy/sdk/
+```
+
+- Install it and cross-compile `hello.c`:
+
+```bash
+./build/tmp/deploy/sdk/<sdk>.sh -d /tmp/yocto-sdk
+source /tmp/yocto-sdk/environment-setup-*
+$CC hello.c -o hello
+file hello
+```
+
+- Challenge: build the eSDK with `populate_sdk_ext` and run `devtool` from it.
+
+---
+layout: default
+---
+
+::title::
+
+Checkpoint: SDK
+
+::body::
+
+1. What is the difference between a standard SDK and an eSDK?
+2. How do you build and install the standard SDK?
+3. Which variables control the SDK contents?
+4. How do you add a build dependency to an eSDK?
+5. What does `devtool ide-sdk` generate?

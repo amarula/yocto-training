@@ -17,18 +17,14 @@ Yocto devtool
 
 ::body::
 
-- `devtool` is a collection of tools for working on recipes:
-  - `devtool add`
-  - `devtool edit-recipe`
-  - `devtool upgrade`
-  - `devtool finish`
-  - `devtool modify`
-  - `devtool deploy-target`
-  - `devtool undeploy-target`
-  - `devtool build`
-  - `devtool build-image`
-  - `devtool ide-sdk`
-  - etc.
+`devtool` is a collection of tools for working on recipes:
+
+- Beginning work: `add`, `modify`, `upgrade`
+- Getting information: `status`, `search`, `latest-version`, `check-upgrade-status`
+- Working in the workspace: `build`, `build-image`, `edit-recipe`, `find-recipe`, `update-recipe`, `finish`, `reset`
+- Testing on target: `deploy-target`, `undeploy-target`
+- IDE integration: `ide-sdk`
+- Advanced: `menuconfig`, `extract`, `sync`, `export`, `import`, `create-workspace`
 
 ---
 layout: default
@@ -128,6 +124,61 @@ layout: default
 
 ::title::
 
+Adding a recipe with devtool
+
+::body::
+
+- Create a recipe from a source tree or a remote URI:
+
+```bash
+devtool add https://example.com/hello-1.0.tar.gz
+devtool add myhello /path/to/source
+devtool add --version 2.1 --srcbranch main --srcrev <sha> \
+  https://github.com/example/hello.git
+```
+
+- The recipe is created in `workspace/recipes/` and the source in `workspace/sources/`.
+- The `workspace` layer is added to `bblayers.conf`.
+- Useful options:
+  - `-V/--version`, `-S/--srcrev`, `-B/--srcbranch`
+  - `-a/--autorev` for a floating revision
+  - `-n/--no-extract` when you already have a source tree
+  - `--binary` for pre-built files
+  - `--also-native` to add a native variant
+  - `--src-subdir` for a subdirectory
+
+---
+layout: default
+---
+
+::title::
+
+Upgrading a recipe with devtool
+
+::body::
+
+- Upgrade an existing recipe:
+
+```bash
+devtool upgrade hello
+devtool upgrade hello --version 2.0 --srcrev <sha>
+```
+
+- The upgraded recipe and source are placed in the workspace.
+- Existing patches are applied to the new source; rebase them if needed.
+- Options:
+  - `--stable` to consider only stable upstream releases
+  - `-V/--version`, `-S/--srcrev`, `-B/--srcbranch`
+  - `--no-patch` to skip applying existing patches
+  - `--keep-failure` to keep the failed upgrade for debugging
+- Finish with `devtool finish hello <layer>`.
+
+---
+layout: default
+---
+
+::title::
+
 Yocto devtool modify recipe
 
 ::body::
@@ -186,23 +237,25 @@ layout: default
 
 ::title::
 
-Yocto devtool some examples
+Finishing a recipe with devtool
 
 ::body::
 
-- `devtool modify gdb`
-- Now a workspace is created and you can go inside it. You will find the gdb code.
-- Create your git patch using git commands.
-- `devtool update-recipe -a sources/meta-w_and_h gdb` and now create the bbappend for your meta layer.
-- `devtool reset gdb` (note: the workspace directory must be removed manually).
-
-In the case of a package that is not git, devtool creates a git repository automatically that lets you add your patches. You can easily try using:
+- `devtool finish` pushes committed changes to a layer and removes the recipe from the workspace:
 
 ```bash
-devtool modify connman
+devtool finish hello meta-training
+devtool finish -m patch hello meta-training
+devtool finish -m srcrev hello meta-training
 ```
 
-NOTE: layers play a role here if multiple versions of the package are present.
+- Modes:
+  - `patch` — source changes as patches
+  - `srcrev` — update `SRCREV`
+  - `auto` — choose based on the recipe (default)
+- Commit changes in the workspace source tree first.
+- `--dry-run` reports what would change.
+- `--remove-work` cleans the workspace sources.
 
 ---
 layout: default
@@ -210,18 +263,146 @@ layout: default
 
 ::title::
 
-Yocto devtool some examples
+Building and deploying with devtool
 
 ::body::
 
-- `devtool status` reports your workspace and the project you are working on.
-- devtool lets you change code and create patches and bbappends.
-- devtool lets us create a new recipe from scratch.
-- devtool lets you build:
-  - `devtool build connman` and test it.
-  - `devtool deploy-target <connection option to copy it>`
-- `devtool reset` allows cleaning up the workspace. If this fails because the package added was not well integrated, you can run `devtool reset -n`.
-- And devtool lets you create a new build recipe from scratch by guessing the build system. That's the magic, but check now `build/conf/bblayers.conf`: `<your build path>/workspace` is added as an entry.
+- Build the recipe in the workspace:
+
+```bash
+devtool build hello
+```
+
+- Build an image that includes workspace recipes:
+
+```bash
+devtool build-image training-image
+```
+
+- Copy the output to a running target:
+
+```bash
+devtool deploy-target hello root@192.168.1.10
+devtool undeploy-target hello root@192.168.1.10
+```
+
+- The target needs network access and the runtime dependencies already installed.
+
+---
+layout: default
+---
+
+::title::
+
+devtool ide-sdk
+
+::body::
+
+- Generate an IDE configuration for a modified recipe:
+
+```bash
+devtool modify hello
+devtool ide-sdk hello training-image
+```
+
+- Modes:
+  - `modified` (default): workspace source, target image and debug configuration
+  - `shared`: cross-toolchain and shared sysroot
+- `-i code` (default) or `-i none`.
+- `-t user@host` configures remote debugging on a running target.
+- Requires an image recipe for the target and, for C/C++, a debugger/gdbserver.
+
+---
+layout: default
+---
+
+::title::
+
+recipetool
+
+::body::
+
+- `recipetool` creates and updates recipes non-interactively:
+
+```bash
+recipetool create https://example.com/hello-1.0.tar.gz
+recipetool create -o hello_1.0.bb /path/to/source
+recipetool newappend meta-training busybox
+recipetool appendsrcfile meta-training busybox file://hello.conf
+recipetool setvar hello FOO bar
+```
+
+- `create` supports tarballs, git, npm, PyPI and more.
+- `newappend` creates a `.bbappend` in a layer.
+- `appendsrcfile` adds a file to an existing recipe through a `.bbappend`.
+- `devtool add` wraps `recipetool create` and manages the workspace.
+
+---
+layout: default
+---
+
+::title::
+
+Managing the workspace
+
+::body::
+
+- Inspect the workspace:
+
+```bash
+devtool status
+devtool search <pattern>
+devtool latest-version hello
+devtool check-upgrade-status
+```
+
+- Share or move the workspace:
+
+```bash
+devtool export --file workspace.tar
+devtool import workspace.tar
+```
+
+- Other useful commands:
+  - `devtool edit-recipe`, `devtool find-recipe`
+  - `devtool menuconfig` for Kconfig-based recipes
+  - `devtool extract`, `devtool sync`
+  - `devtool reset` to remove a recipe from the workspace
+
+---
+layout: default
+---
+
+::title::
+
+Hands-on lab: devtool
+
+::body::
+
+- Lab: `labs/exercises/06-devtool.md`
+- Start from the lab project:
+
+```bash
+cd labs
+./kas.sh shell kas/qemu.yml
+devtool modify hello
+```
+
+- Edit `workspace/sources/hello/hello.c`, then build and test:
+
+```bash
+devtool build hello
+devtool deploy-target hello root@<target>
+```
+
+- Commit the change and finish it into the training layer:
+
+```bash
+git -C workspace/sources/hello commit -am "Update hello message"
+devtool finish -m patch hello meta-training
+```
+
+- Challenge: use `devtool add` to add a new upstream recipe and `devtool upgrade` to update it.
 
 ---
 layout: default
@@ -234,6 +415,7 @@ Checkpoint: devtool
 ::body::
 
 1. What does `devtool modify` create, and where?
-2. When do you use `devtool update-recipe` versus `devtool update-recipe -a`?
-3. How do you clean up the workspace after finishing?
-4. Why is editing `tmp/work/` directly discouraged?
+2. When do you use `devtool update-recipe` versus `devtool finish`?
+3. What is the difference between `devtool add` and `recipetool create`?
+4. Which modes does `devtool finish` support?
+5. What does `devtool ide-sdk` require?
