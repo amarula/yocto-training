@@ -11,3 +11,7 @@ src: ./slides/01-course.md
 ---
 src: ./slides/02-linux-boot.md
 ---
+
+---
+src: ./slides/03-distros.md
+---
