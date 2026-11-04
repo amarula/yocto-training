@@ -62,10 +62,10 @@ the real board.
 | `exercises/03-variables.md` | Variables, overrides and `bitbake -e` (planned) |
 | `exercises/04-hello-recipe.md` | Write and package a recipe (planned) |
 | `exercises/05-layer-and-bbappend.md` | Create a layer and a `.bbappend` (planned) |
-| `exercises/06-devtool.md` | Modify, patch and finish a recipe with devtool (planned) |
+| `exercises/06-devtool.md` | Modify, patch and finish a recipe with devtool |
 | `exercises/07-image-and-wic.md` | Customize the image and the WIC layout |
 | `exercises/08-kernel-fragment.md` | Add a kernel configuration fragment |
-| `exercises/09-sdk.md` | Build and use the SDK/eSDK (planned) |
+| `exercises/09-sdk.md` | Build and use the SDK/eSDK |
 | `exercises/10-systemd-service.md` | Add a systemd service |
 | `exercises/11-capstone.md` | Build a complete custom image (planned) |
 
