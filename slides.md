@@ -7,3 +7,7 @@ colorSchema: both
 highlighter: shiki
 src: ./slides/01-course.md
 ---
+
+---
+src: ./slides/02-linux-boot.md
+---
