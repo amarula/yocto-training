@@ -31,3 +31,7 @@ src: ./slides/06-basics.md
 ---
 src: ./slides/07-variables-packages.md
 ---
+
+---
+src: ./slides/08-bitbake.md
+---
