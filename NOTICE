@@ -1,0 +1,30 @@
+Yocto Training — attribution notice
+
+Unless otherwise noted, the slides, images and documentation in this
+repository are licensed under the Creative Commons Attribution-ShareAlike
+3.0 Unported License (CC BY-SA 3.0). The full license text is in LICENSE.
+
+Some slides are based on or adapted from:
+
+  Bootlin
+  "Yocto Project and OpenEmbedded development training"
+  https://bootlin.com/training/yocto/
+  Bootlin training materials are licensed under CC BY-SA 3.0.
+
+The original course material also took inspiration from public
+presentations released under CC BY-SA 3.0.
+
+Changes made for this course:
+
+  - reorganized the material into a chapter-based Slidev deck;
+  - updated commands, recipes and workflow to Yocto 6.0 "Wrynose";
+  - replaced Poky with OpenEmbedded-Core and added KAS-based labs;
+  - added and expanded images, kernel/U-Boot, system integration,
+    debugging, devtool, SDK and compliance material.
+
+When redistributing this material or derivative works, keep this
+attribution and the CC BY-SA 3.0 license. Derivative works must be shared
+under the same license.
+
+This notice is not legal advice. Consult the license text and, if needed,
+qualified legal counsel for your situation.

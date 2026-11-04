@@ -90,6 +90,14 @@ See `labs/README.md` for the exercise index.
 - `slidev-theme-amarula/` — Amarula Solutions Slidev theme (git submodule)
 - `labs/` — hands-on KAS project and exercises; see `labs/README.md`
 
-## License
+## License and attribution
 
-Slides under Creative Commons license BY-SA 3.0.
+Unless otherwise noted, the slides and materials in this repository are
+licensed under the [Creative Commons Attribution-ShareAlike 3.0 Unported
+License](https://creativecommons.org/licenses/by-sa/3.0/). The full license
+text is in [`LICENSE`](LICENSE).
+
+Some slides are based on or adapted from Bootlin's
+["Yocto Project and OpenEmbedded development training"](https://bootlin.com/training/yocto/),
+which is licensed under CC BY-SA 3.0. See [`NOTICE`](NOTICE) for the
+attribution, the list of changes, and the share-alike terms.

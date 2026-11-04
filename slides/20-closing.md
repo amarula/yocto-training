@@ -99,6 +99,25 @@ Next steps
 - Keep the KAS lockfile and SBOM with every release.
 
 ---
+layout: default
+---
+
+::title::
+
+License and attribution
+
+::body::
+
+- Unless otherwise noted, these slides are licensed under **Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)**:
+  [https://creativecommons.org/licenses/by-sa/3.0/](https://creativecommons.org/licenses/by-sa/3.0/)
+- Some slides are based on or adapted from Bootlin's Yocto training:
+  - Bootlin, "Yocto Project and OpenEmbedded development training" — [https://bootlin.com/training/yocto/](https://bootlin.com/training/yocto/)
+  - Bootlin's training materials are licensed under CC BY-SA 3.0.
+- Changes: reorganized, updated to Yocto 6.0, and rewritten for this course.
+- The original material also took inspiration from public presentations released under CC BY-SA 3.0.
+- Keep this attribution and the CC BY-SA 3.0 license when reusing the slides; see `LICENSE` and `NOTICE` in the repository.
+
+---
 layout: center
 class: text-center
 ---
