@@ -67,3 +67,7 @@ src: ./slides/15-license.md
 ---
 src: ./slides/16-kas.md
 ---
+
+---
+src: ./slides/17-repo.md
+---
