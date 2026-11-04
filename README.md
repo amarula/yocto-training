@@ -32,6 +32,7 @@ npm run export:png # PNG export
 - `public/images/` — images extracted from the original deck
 - `source/Yocto Training.odp` — original presentation kept as reference
 - `slidev-theme-amarula/` — Amarula Solutions Slidev theme (git submodule)
+- `labs/` — hands-on KAS project and exercises; see `labs/README.md`
 
 ## License
 

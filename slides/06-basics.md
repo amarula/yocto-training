@@ -224,16 +224,41 @@ sudo locale-gen en_US.UTF-8
 
 Those packages are used for building a real platform. Alternatively, `kas-container` can provide a controlled build environment.
 
-The recommended way to set up the training project is KAS: it fetches all repositories and generates `local.conf` and `bblayers.conf`.
+The hands-on project lives in `labs/` in the training repository. The `kas.sh` wrapper keeps repository checkouts in `labs/work/` and the build in `labs/build/`. See `labs/README.md` for the lab index.
 
 ```bash
 pipx install kas
-git clone <training-project-url>
-cd <training-project>
-kas build kas/yocto-training.yml
+cd labs
+./kas.sh build kas/qemu.yml
 ```
 
 The KAS chapter later explains the configuration file in detail.
+
+---
+layout: default
+---
+
+::title::
+
+Hands-on labs
+
+::body::
+
+The training repository contains a working lab project under `labs/`:
+
+```text
+labs/
+├── kas/qemu.yml          # QEMU build
+├── kas/imx8mp.yml        # i.MX8M Plus board build
+├── meta-training/        # training layer
+├── labs/                 # step-by-step exercises
+└── scripts/check-lab.sh  # validation
+```
+
+- `./kas.sh build kas/qemu.yml` builds `training-image`
+- `./kas.sh shell kas/qemu.yml -c 'runqemu qemux86-64 training-image'` boots it
+- `labs/00-setup.md`, `labs/01-build-and-run.md` and `labs/02-inspect-build.md` are the first exercises
+- `./scripts/check-lab.sh` validates the result
 
 ---
 layout: default
