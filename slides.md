@@ -15,3 +15,7 @@ src: ./slides/02-linux-boot.md
 ---
 src: ./slides/03-distros.md
 ---
+
+---
+src: ./slides/04-yocto-intro.md
+---
