@@ -47,3 +47,7 @@ src: ./slides/10-classes.md
 ---
 src: ./slides/11-layers.md
 ---
+
+---
+src: ./slides/12-images.md
+---
