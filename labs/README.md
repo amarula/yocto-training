@@ -90,7 +90,8 @@ the real board.
 | `exercises/09-sdk.md` | Build and use the SDK/eSDK |
 | `exercises/10-systemd-service.md` | Add a systemd service |
 | `exercises/11-debugging.md` | Debug build and runtime failures |
-| `exercises/12-capstone.md` | Build a complete custom image (planned) |
+| `exercises/12-build-internals.md` | Inspect sstate, features and build performance |
+| `exercises/13-capstone.md` | Build a complete custom image (planned) |
 
 ## Validate a completed lab
 

@@ -73,13 +73,17 @@ src: ./slides/17-debugging.md
 ---
 
 ---
-src: ./slides/18-license.md
+src: ./slides/18-build-internals.md
 ---
 
 ---
-src: ./slides/19-kas.md
+src: ./slides/19-license.md
 ---
 
 ---
-src: ./slides/20-closing.md
+src: ./slides/20-kas.md
+---
+
+---
+src: ./slides/21-closing.md
 ---
