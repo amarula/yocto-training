@@ -12,4 +12,4 @@ repos:
     url: https://github.com/Freescale/meta-freescale.git
     branch: wrynose
     layers:
-      meta-freescale:
+      .:
