@@ -1,0 +1,17 @@
+{
+  "name": "yocto-training",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Yocto Training slides",
+  "scripts": {
+    "dev": "slidev slides.md",
+    "build": "slidev build slides.md",
+    "export": "slidev export slides.md",
+    "export:png": "slidev export slides.md --format png"
+  },
+  "devDependencies": {
+    "@slidev/cli": "51.8.1",
+    "playwright-chromium": "1.53.0"
+  }
+}
