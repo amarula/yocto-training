@@ -222,3 +222,18 @@ Yocto devtool some examples
   - `devtool deploy-target <connection option to copy it>`
 - `devtool reset` allows cleaning up the workspace. If this fails because the package added was not well integrated, you can run `devtool reset -n`.
 - And devtool lets you create a new build recipe from scratch by guessing the build system. That's the magic, but check now `build/conf/bblayers.conf`: `<your build path>/workspace` is added as an entry.
+
+---
+layout: default
+---
+
+::title::
+
+Checkpoint: devtool
+
+::body::
+
+1. What does `devtool modify` create, and where?
+2. When do you use `devtool update-recipe` versus `devtool update-recipe -a`?
+3. How do you clean up the workspace after finishing?
+4. Why is editing `tmp/work/` directly discouraged?

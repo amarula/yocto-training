@@ -302,3 +302,18 @@ Yocto Distro layers best practices
   - Configuration files.
   - Specific classes.
   - Distribution-specific recipes: initialization scripts, splash screen…
+
+---
+layout: default
+---
+
+::title::
+
+Checkpoint: layers
+
+::body::
+
+1. What does `BBFILE_PRIORITY` control?
+2. How do you add a new layer to a build?
+3. When should you use a `.bbappend` instead of modifying a recipe?
+4. What does `LAYERSERIES_COMPAT` protect against?

@@ -287,3 +287,18 @@ KAS and bitbake-setup
 - KAS adds multi-repository layering, includes, layer priorities, lockfiles, container integration and CI-friendly releases.
 - For a product with several layers and a tagged release, KAS is the more complete project tool.
 - For the training project we use KAS; the concepts transfer directly to other setup tools.
+
+---
+layout: default
+---
+
+::title::
+
+Checkpoint: KAS
+
+::body::
+
+1. What does `header.version` describe?
+2. Why should a release pin `tag` or `commit` instead of only `branch`?
+3. What does `kas lock` produce, and why is it committed?
+4. How do you run a single BitBake command inside the KAS environment?

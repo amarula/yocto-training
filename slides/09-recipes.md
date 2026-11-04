@@ -599,3 +599,18 @@ Yocto recipe patches (4 / 4)
   - `noop` -> fail on conflicts
   - `user` -> ask the user to fix it
 - By default, `PATCHRESOLVE = "noop"` in OE-Core (`meta/conf/bitbake.conf`).
+
+---
+layout: default
+---
+
+::title::
+
+Checkpoint: recipes
+
+::body::
+
+1. What is the difference between `DEPENDS` and `RDEPENDS`?
+2. When must you use `S = "${UNPACKDIR}"`?
+3. How do you apply a patch listed in `SRC_URI`?
+4. Where do you look first when `do_compile` fails?

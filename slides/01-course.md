@@ -42,6 +42,25 @@ layout: default
 
 ::title::
 
+Course structure
+
+::body::
+
+- **Foundations**: Linux boot, embedded Linux distros, Yocto fundamentals, OE-Core and KAS
+- **Metadata**: variables and overrides, BitBake, recipes, classes, layers
+- **Images and integration**: images, WIC, devtool, SDK
+- **Releases and compliance**: license/SBOM, reproducible KAS/CI builds
+
+Each block ends with a lab and a checkpoint. The hands-on project lives in `labs/`.
+
+Suggested timing: 5 days — 4 core days plus 1 day for the capstone and advanced modules.
+
+---
+layout: default
+---
+
+::title::
+
 Goals of training
 
 ::body::
@@ -50,6 +69,43 @@ Goals of training
 - Yocto architecture
 - How to proficiently operate using Yocto
 - Create and maintain your project
+
+---
+layout: default
+---
+
+::title::
+
+Prerequisites and outcomes
+
+::body::
+
+<div class="grid grid-cols-2 gap-8">
+
+<div>
+
+### Assumed knowledge
+
+- Linux command line and git
+- C programming
+- Embedded Linux basics: bootloader, kernel, root filesystem
+
+</div>
+
+<div>
+
+### By the end you will be able to
+
+- Build and boot a Yocto image with KAS
+- Read and write recipes, classes and bbappends
+- Create a layer and a BSP machine
+- Customize images with packages, WIC and kernel fragments
+- Use devtool and the SDK
+- Produce license/SBOM reports and a reproducible release
+
+</div>
+
+</div>
 
 ---
 layout: default
@@ -107,3 +163,26 @@ Training setup
 - Provide the email to register to the Mattermost channel
 
 During the training, it will be possible to access an external disk or to have interaction and communication with the teacher for a period of time.
+
+---
+layout: default
+---
+
+::title::
+
+Labs and checkpoints
+
+::body::
+
+- The hands-on project is in `labs/` in the training repository.
+- Each block ends with a short checkpoint (three questions) and a lab.
+- The first exercises are `labs/exercises/00-setup.md`, `01-build-and-run.md` and `02-inspect-build.md`.
+- The capstone combines a custom recipe, layer, systemd service, kernel fragment, WIC image, SDK and a locked KAS release.
+
+```bash
+cd labs
+./kas.sh build kas/qemu.yml
+./kas.sh shell kas/qemu.yml -c 'runqemu qemux86-64 training-image'
+```
+
+See `labs/README.md` for the full exercise index.

@@ -313,3 +313,18 @@ Let's do some recap
 - These tasks can be run independently (if their dependencies are met).
 - All the available packages in the project layer are not selected by default to be built and included in the images.
 - Some packages may provide the same functionality, e.g. SSH and Dropbear.
+
+---
+layout: default
+---
+
+::title::
+
+Checkpoint: build and environment
+
+::body::
+
+1. What does `oe-init-build-env` set up, and where are `local.conf` and `bblayers.conf` generated?
+2. What is the difference between `MACHINE` and `DISTRO`?
+3. Which KAS command fetches the repositories and generates the configuration without building?
+4. Run `./scripts/check-lab.sh` in `labs/`. Does it pass?
