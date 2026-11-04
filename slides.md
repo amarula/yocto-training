@@ -53,21 +53,25 @@ src: ./slides/12-images.md
 ---
 
 ---
-src: ./slides/13-devtool.md
+src: ./slides/13-kernel-uboot.md
 ---
 
 ---
-src: ./slides/14-sdk.md
+src: ./slides/14-devtool.md
 ---
 
 ---
-src: ./slides/15-license.md
+src: ./slides/15-sdk.md
 ---
 
 ---
-src: ./slides/16-kas.md
+src: ./slides/16-license.md
 ---
 
 ---
-src: ./slides/17-closing.md
+src: ./slides/17-kas.md
+---
+
+---
+src: ./slides/18-closing.md
 ---
