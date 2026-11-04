@@ -165,14 +165,22 @@ Order of variables assignment
 
 ::body::
 
-```mermaid
-flowchart TD
-  M["Metadata (config + recipes)"] --> P["+= =+ ??= ?= = .= =. applied in parsing order"]
-  P --> R[":remove"]
-  R --> A[":append"]
-  A --> PR[":prepend"]
-  PR --> F["final value"]
-```
+<div class="flex flex-col items-center text-sm leading-tight">
+  <div class="border-2 border-accent rounded px-5 py-2">Metadata (config + recipes)</div>
+  <div class="text-accent text-xl leading-none">↓</div>
+  <div class="border-2 border-accent rounded px-5 py-2 text-center">
+    <code>+= =+ ??= ?= = .= =.</code><br/>
+    applied in parsing order
+  </div>
+  <div class="text-accent text-xl leading-none">↓</div>
+  <div class="border-2 border-accent rounded px-5 py-2"><code>:remove</code></div>
+  <div class="text-accent text-xl leading-none">↓</div>
+  <div class="border-2 border-accent rounded px-5 py-2"><code>:append</code></div>
+  <div class="text-accent text-xl leading-none">↓</div>
+  <div class="border-2 border-accent rounded px-5 py-2"><code>:prepend</code></div>
+  <div class="text-accent text-xl leading-none">↓</div>
+  <div class="border-2 border-accent rounded px-5 py-2 font-semibold">final value</div>
+</div>
 
 ---
 layout: default
