@@ -19,3 +19,7 @@ src: ./slides/03-distros.md
 ---
 src: ./slides/04-yocto-intro.md
 ---
+
+---
+src: ./slides/05-fundamentals.md
+---
