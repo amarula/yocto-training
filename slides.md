@@ -23,3 +23,7 @@ src: ./slides/04-yocto-intro.md
 ---
 src: ./slides/05-fundamentals.md
 ---
+
+---
+src: ./slides/06-basics.md
+---
