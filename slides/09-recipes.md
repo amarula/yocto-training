@@ -24,7 +24,6 @@ SUMMARY = "Poky-tiny init"
 DESCRIPTION = "Basic init system for poky-tiny"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r2"
 RDEPENDS:${PN} = "busybox"
 SRC_URI = "file://init \
            file://rc.local.sample \
@@ -63,7 +62,7 @@ Yocto recipes
 - `DESCRIPTION`: describes what this package is doing or is supposed to implement.
 - `LICENSE`: declares the package license. This is really important to have because it is used for license compliance when we need to release a product on the market.
 - `LIC_FILES_CHKSUM`: defines the license checksum using a URI form.
-- `PR`: represents the revision of the recipe. Default value is "r0". Subsequent revisions conventionally use "r1", "r2" and so on.
+- `PR`: package revision. It is usually omitted nowadays; the PR service manages package revisions automatically.
 - `SRC_URI`: is where to download code. This can refer even to a local directory, as in this case, and local files.
 - `S`: is where the source code should be downloaded.
 
@@ -212,7 +211,7 @@ Yocto recipe source location
 
 ::body::
 
-Let's dive a bit. `FILESPATH` covers even files needed to generate package patches (defined in `meta/classes/base.bbclass`). Consider `FILE_DIRNAME` equal to the recipe directory:
+Let's dive a bit. `FILESPATH` covers even files needed to generate package patches (defined in `meta/classes-global/base.bbclass`). Consider `FILE_DIRNAME` equal to the recipe directory:
 
 - `FILESPATH` is generated with all combinations of:
 - BASE paths:
@@ -238,11 +237,11 @@ Yocto recipe uri scheme by example
 
 ```text
 SRC_URI = "https://mesa.freedesktop.org/archive/demos/${BPN}-${PV}.tar.bz2"
-SRC_URI = "git://github.com/google/shaderc.git;protocol=https;branch=main"
+SRC_URI = "git+https://github.com/google/shaderc.git;branch=main"
 SRC_URI = "file://pointercal.xinput"
-SRC_URI += "https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.0.9.tar.xz \
+SRC_URI += "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.tar.xz \
             file://kernelpatch.scc \
-            file://kernel-4.0.9.cfg \
+            file://kernel-6.18.cfg \
            "
 ```
 
@@ -277,14 +276,14 @@ Yocto recipe uri scheme file integrity
 
 We need to be sure that the package we download is what we expect. How can this be managed?
 
-- An md5 or sha256 sum must be provided when the protocol used to retrieve the file(s) does not guarantee their integrity. This is the case for https, http or ftp.
+- A sha256 sum must be provided when the protocol used to retrieve the file(s) does not guarantee their integrity. This is the case for https, http or ftp.
 - It's possible to use checksums for more than one file, using the `name` parameter:
 
 ```text
 SRC_URI = "http://example.com/src.tar.bz2;name=tarball \
            http://example.com/fixes.patch;name=patch"
-SRC_URI[tarball.md5sum] = "97b2c3fb082241ab5c56..."
-SRC_URI[patch.md5sum] = "b184acf9eb39df794ffd..."
+SRC_URI[tarball.sha256sum] = "97b2c3fb082241ab5c56..."
+SRC_URI[patch.sha256sum] = "b184acf9eb39df794ffd..."
 ```
 
 ---
@@ -366,7 +365,7 @@ bitbake gdb -> what are you expecting from this command?
 bitbake -c devshell gdb -> what are you expecting from this command?
 ```
 
-The workdir of this command is: `build/tmp/work/core2-64-poky-linux/gdb/11.2-r0/gdb-11.2`
+The workdir of this command is: `build/tmp/work/core2-64-poky-linux/gdb/17.2-r0/gdb-17.2`
 
 ---
 layout: default
@@ -444,11 +443,11 @@ Yocto recipe organization. Let's dive in it
 tree -L 1
 .
 ├── files
-├── libglu_9.0.2.bb
-├── mesa_22.0.3.bb
+├── libglu_9.0.3.bb
+├── mesa_26.0.5.bb
 ├── mesa-demos
-├── mesa-demos_8.4.0.bb
-├── mesa-gl_22.0.3.bb
+├── mesa-demos_9.0.0.bb
+├── mesa-gl_26.0.5.bb
 └── mesa.inc
 ```
 
@@ -456,7 +455,7 @@ We have everything here: the `mesa.inc` and the recipes.
 
 The `files` directory usually includes files to be installed or patches to be applied.
 
-`mesa-gl_22.0.3.bb`: `require mesa.inc`
+`mesa-gl_26.0.5.bb`: `require mesa.inc`
 
 ---
 layout: default
@@ -489,11 +488,11 @@ How to find the recipes?
 
 ```bash
 find -name '*gdb*bb*'
-./meta/recipes-kernel/wireless-regdb/wireless-regdb_2023.02.13.bb
-./meta/recipes-support/gdbm/gdbm_1.23.bb
-./meta/recipes-devtools/gdb/gdb_11.2.bb
-./meta/recipes-devtools/gdb/gdb-cross-canadian_11.2.bb
-./meta/recipes-devtools/gdb/gdb-cross_11.2.bb
+./meta/recipes-kernel/wireless-regdb/wireless-regdb_2026.09.03.bb
+./meta/recipes-support/gdbm/gdbm_1.26.bb
+./meta/recipes-devtools/gdb/gdb_17.2.bb
+./meta/recipes-devtools/gdb/gdb-cross-canadian_17.2.bb
+./meta/recipes-devtools/gdb/gdb-cross_17.2.bb
 ```
 
 Or nicer and better, using tools that support regular expressions:
@@ -502,13 +501,13 @@ Or nicer and better, using tools that support regular expressions:
 bitbake-layers show-recipes 'gdb*'
 === Matching recipes: ===
 gdb:
-  meta             11.2
+  meta             17.2
 gdb-cross-canadian-x86-64:
-  meta             11.2
+  meta             17.2
 gdb-cross-x86_64:
-  meta             11.2
+  meta             17.2
 gdbm:
-  meta             1.23
+  meta             1.26
 ```
 
 ---
@@ -546,8 +545,8 @@ Yocto recipe patches (2 / 4)
 require recipes-kernel/linux/linux-imx.inc
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
-LINUX_VERSION = "6.4.0"
-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git;branch=${SRCBRANCH};protocol=https \
+LINUX_VERSION = "6.18"
+SRC_URI = "git+https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git;branch=${SRCBRANCH} \
            file://0001-arm64-dts-freescale-Add-Engicam-i.Core-MX8M-Plus-C.T.patch \
            file://0002-dt-bindings-arm-fsl-Add-Engicam-i.Core-MX8M-Plus-C.T.patch \
           "

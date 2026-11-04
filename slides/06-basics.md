@@ -183,18 +183,18 @@ bitbake core-image-minimal
 Loading cache: 100% |############################################| ETA:  --:--:--
 ---
 Build Configuration:
-BB_VERSION           = "2.0.0"
+BB_VERSION           = "2.18.0"
 BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "ubuntu-23.04"
+NATIVELSBSTRING      = "ubuntu-24.04"
 TARGET_SYS           = "x86_64-poky-linux"
 MACHINE              = "qemux86-64"
 DISTRO               = "poky"
-DISTRO_VERSION       = "4.0.11"
+DISTRO_VERSION       = "6.0.4"
 TUNE_FEATURES        = "m64 core2"
 TARGET_FPU           = ""
 meta
 meta-poky
-meta-yocto-bsp       = "kirkstone:84dd3d0e6c90656f2a7105aabd303a62fa49eeba"
+meta-yocto-bsp       = "wrynose:79b6d87030178bed0088ad3b00aa6dfbabac37c4"
 ```
 
 ---
@@ -211,14 +211,14 @@ Let's set up our environment on local machine
 sudo apt install gawk wget git diffstat unzip texinfo gcc build-essential \
   chrpath socat cpio python3 python3-pip python3-pexpect xz-utils \
   debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa \
-  libsdl1.2-dev python3-subunit mesa-common-dev zstd liblz4-tool file locales
+  libsdl2-dev python3-subunit mesa-common-dev zstd liblz4-tool file locales
 sudo locale-gen en_US.UTF-8
 ```
 
 Those packages are used for building a real platform.
 
 ```bash
-git clone -b kirkstone https://git.yoctoproject.org/git/poky
+git clone -b wrynose https://git.yoctoproject.org/git/poky
 . ./poky/oe-init-build-env
 bitbake core-image-full-cmdline
 ```

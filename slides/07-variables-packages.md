@@ -244,7 +244,7 @@ Now we know that we select a specific package. How can we select the version of 
 - We can select a specific package version using `PREFERRED_VERSION`.
 - The package names have to suffix this variable.
   - `PREFERRED_VERSION_nginx = "1.20.1"`
-  - `PREFERRED_VERSION_linux-yocto = "5.14%"`
+  - `PREFERRED_VERSION_linux-yocto = "6.18%"`
 
 Do not be scared about `%`; this is a wildcard that matches anything after it.
 

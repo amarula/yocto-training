@@ -89,6 +89,7 @@ The SDK image contains:
   - `bitbake -c populate_sdk core-image-full-cmdline`
 - The result comes to the same directory as the generic SDK.
 - The SDK is compatible with the `MACHINE` you are building for.
+- For a self-contained SDK that also includes the build system, use the extensible SDK: `bitbake -c populate_sdk_ext <image>`.
 
 As we described, the SDK image contains even packages that the user can customize.
 

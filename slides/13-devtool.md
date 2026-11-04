@@ -27,6 +27,7 @@ Yocto devtool
   - `devtool undeploy-target`
   - `devtool build`
   - `devtool build-image`
+  - `devtool ide-sdk`
   - etc.
 
 ---
@@ -59,7 +60,7 @@ Yocto devtool
 
 Where can I find documentation resources?
 
-- Yocto Project Reference Manual, chapter 8
+- Yocto Project Reference Manual, `devtool` chapter
 - Yocto Project Application Development and the Extensible Software Development Kit (eSDK)
 - `devtool --help`
 - `devtool <command> --help`

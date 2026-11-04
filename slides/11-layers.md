@@ -72,10 +72,11 @@ Common layers are not enough to create a full complete BSP. Users need graphics 
 
 Examples:
 
-- `meta-qt5`
+- `meta-qt6`
 - `meta-freescale`
 - `meta-ti`
 - `meta-rockchip`
+- `meta-arm`
 - `meta-rauc`
 - `meta-swupdate`
 
@@ -127,11 +128,12 @@ Yocto useful layers
 As I mentioned, many SoCs use their specific layer (NXP, TI, Rockchip), and some of them provide relevant tools or packages that are used in many distributions:
 
 - `meta-swupdate` and `meta-rauc`, as I have already mentioned
+- `meta-openembedded` (meta-oe, meta-python, meta-networking, meta-multimedia)
+- `meta-arm`
+- `meta-security`
+- `meta-virtualization`
 - `meta-browser`
-- `meta-gstreamer1.0`
-- `meta-java`
-- `meta-realtime`
-- `meta-telephony`
+- `meta-qt6`
 
 We always need matching between the Yocto version and layer compatibility.
 
@@ -156,8 +158,8 @@ BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
 BBFILE_COLLECTIONS += "meta-w_and_h"
 BBFILE_PATTERN_meta-w_and_h = "^${LAYERDIR}/"
 BBFILE_PRIORITY_meta-w_and_h = "6"
-LAYERDEPENDS_meta-w_and_h = "core freescale-layer"
-LAYERSERIES_COMPAT_meta-w_and_h = "kirkstone"
+LAYERDEPENDS_meta-w_and_h = "core openembedded-layer"
+LAYERSERIES_COMPAT_meta-w_and_h = "wrynose"
 ```
 
 ---
@@ -176,7 +178,7 @@ Yocto A simple layer (2 / 3)
 - `BBFILE_PATTERN_<layer_name>` expands immediately during parsing to provide the directory of the layer.
 - `BBFILE_PRIORITY_<layer_name>` establishes a priority to use for recipes in the layer.
 - `LAYERDEPENDS_<layer_name> = "layer1 layer2"` lists all layers on which this layer depends (if any).
-- `LAYERSERIES_COMPAT_<layer_name> = "kirkstone"` lists the Yocto Project releases for which the current version is compatible.
+- `LAYERSERIES_COMPAT_<layer_name> = "wrynose"` lists the Yocto Project releases for which the current version is compatible.
 
 ---
 layout: default
@@ -197,7 +199,7 @@ tree -L 1
 └── recipes-example
 ```
 
-This is a dummy layer created using the `bitbake create-layer` command.
+This is a dummy layer created using the `bitbake-layers create-layer` command.
 
 Is that so easy?
 
@@ -266,7 +268,7 @@ Yocto Board support package layer
 - These configuration files are stored under `meta-w_and_h/conf/machine/imx8mp-icore-ctouch2-of10.conf`.
 - The file names correspond to the values set in the `MACHINE` configuration variable.
   - `meta-w_and_h/conf/machine/imx8mp-icore-ctouch2-of10.conf`
-  - `MACHINE = "mx8mp"`
+  - `MACHINE = "imx8mp-icore-ctouch2-of10"`
 - Each machine should be described in the README file of the BSP.
 
 ---

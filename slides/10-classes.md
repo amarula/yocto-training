@@ -55,26 +55,20 @@ Yocto classes usage inside a recipe
 ::body::
 
 ```text
-LICENSE = "GPL-3.0-only & Unknown"
-LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949 \
-                    file://COPYING.DOC;md5=ad1419ecc56e060eccf8184a87c4285f"
-SRC_URI = "https://nano-editor.org/dist/v4/nano-${PV}.tar.xz"
-SRC_URI[md5sum] = "9ef42650960fa71671dc5318841a27a9"
-SRC_URI[sha1sum] = "cd399ad68d68025a4a4406f425a8a543c6ef924b"
-SRC_URI[sha256sum] = "1143defce62e391b241252ffdb6e5c1ded56cfe26d46ee81b796abe0ccc45df9"
-SRC_URI[sha384sum] = "f8f14d10765aba7ac60cd3b63da09468b46b6bf293136cc52c8a2dd5c4885da79347ce898aaf3bba5261117828a9f906"
-SRC_URI[sha512sum] = "280c986ebbc83875270da659232910568bcade962b75ddf9ddc2af6e0fb9aab2b0d029a80d632b5c67fc385958ef4d724aafeeb10299c9e2bc281e737a11845c"
-# NOTE: unable to map the following pkg-config dependencies: ncursesw ncurses
-#       (this is based on recipes that have previously been built and packaged)
-# NOTE: the following library dependencies are unknown, ignoring: ncursesw ncurses curses
-#       (this is based on recipes that have previously been built and packaged)
-DEPENDS = "file zlib ncurses"
-# NOTE: if this software is not capable of being built in a separate build directory
-# from the source, you should replace autotools with autotools-brokensep in the
-# inherit line
-inherit pkgconfig gettext autotools
-# Specify any options you want to pass to the configure script using EXTRA_OECONF:
-EXTRA_OECONF = ""
+SUMMARY = "Small and friendly console text editor"
+DESCRIPTION = "GNU nano is an enhanced clone of the Pico text editor."
+HOMEPAGE = "https://www.nano-editor.org/"
+LICENSE = "GPL-3.0-only"
+LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
+DEPENDS = "ncurses"
+RDEPENDS:${PN} = "ncurses-terminfo-base"
+
+PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
+
+SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
+SRC_URI[sha256sum] = "9f384374b496110a25b73ad5a5febb384783c6e3188b37063f677ac908013fde"
+
+inherit autotools gettext pkgconfig
 ```
 
 ---
@@ -158,8 +152,8 @@ An example of how to use it:
 require recipes-kernel/linux/linux-imx.inc
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
-LINUX_VERSION = "6.4.0"
-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git;branch=${SRCBRANCH};protocol=https \
+LINUX_VERSION = "6.18"
+SRC_URI = "git+https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git;branch=${SRCBRANCH} \
            file://0001-arm64-dts-freescale-Add-Engicam-i.Core-MX8M-Plus-C.T.patch \
            file://0002-dt-bindings-arm-fsl-Add-Engicam-i.Core-MX8M-Plus-C.T.patch \
            file://${THISDIR}/files/fsl-ctouch-display-enable.cfg \
@@ -213,7 +207,6 @@ We said that we need to define some variables in order to pack the kernel. Those
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-imx8mp-icore"
 KERNEL_DEVICETREE = "freescale/imx8mp-icore-mx8mp-ctouch2-of10.dtb \
                     "
-KERNEL_DEVICETREE_BASENAME = "imx8mp-icore-mx8mp-ctouch2-of10"
 KERNEL_IMAGETYPE = "Image"
 RRECOMMENDS:${KERNEL_PACKAGE_NAME}-base = ""
 ```
@@ -244,7 +237,7 @@ Yocto cmake.bbclass example
 
 ::body::
 
-`meta/recipes-graphics/jpeg/libjpeg-turbo_2.1.5.1.bb`
+`meta/recipes-graphics/jpeg/libjpeg-turbo_3.1.3.bb`
 
 This JPEG recipe inherits `cmake`:
 

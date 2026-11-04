@@ -89,3 +89,5 @@ What are the variables that are used to customize the image result?
 | `IMAGE_PKGTYPE` | package type used for the image. |
 | `IMAGE_POSTPROCESS_COMMAND` | commands to run after image generation. |
 | `EXTRA_IMAGEDEPENDS` | additional dependencies for the image. |
+
+Since Yocto 6.0, WIC is maintained as a separate project; OE-Core provides the `wic` recipe and the `image_types_wic` class.

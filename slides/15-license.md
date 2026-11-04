@@ -46,8 +46,8 @@ Copyleft freedom and obligation
 
 There are two projects that we must use when we build a Linux distribution:
 
-- Toolchain (GPLv2, GPLv2.1 and GPLv3)
-- Linux kernel (GPLv2)
+- Toolchain (`GPL-2.0-only`, `GPL-2.0-or-later` and `GPL-3.0-or-later`)
+- Linux kernel (`GPL-2.0-only`)
 
 A real Yocto distribution can contain a huge amount of packages. So how does Yocto help to deal with it?
 
@@ -93,13 +93,29 @@ layout: default
 
 ::title::
 
+Yocto SBOM and CVE checking
+
+::body::
+
+- Yocto 6.0 generates SPDX 3 SBOMs by default through the `create-spdx` class.
+- SBOMs are deployed under `${DEPLOY_DIR}/spdx`.
+- The `sbom-cve-check` class checks the generated SBOM against CVE databases.
+- The old `cve-check` class is obsolete in 6.0; use `sbom-cve-check`.
+- SBOMs are the basis for license and security compliance audits.
+
+---
+layout: default
+---
+
+::title::
+
 Yocto Excluding license
 
 ::body::
 
-- `UNCOMPATIBLE_LICENSE` provides a way to exclude them.
-- `UNCOMPATIBLE_LICENSE` is applied "only on target packages".
-- [https://layers.openembedded.org/layerindex/branch/master/layer/meta-gplv2/](https://layers.openembedded.org/layerindex/branch/master/layer/meta-gplv2/) can be used to add packages using the old license before migration to GPLv3.
+- `INCOMPATIBLE_LICENSE` provides a way to exclude them.
+- `INCOMPATIBLE_LICENSE` is applied "only on target packages".
+- [https://layers.openembedded.org/layerindex/branch/master/layer/meta-gplv2/](https://layers.openembedded.org/layerindex/branch/master/layer/meta-gplv2/) is deprecated and is not recommended for new products; migrate recipes to current license identifiers instead.
 
 Example:
 

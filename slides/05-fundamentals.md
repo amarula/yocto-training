@@ -126,10 +126,10 @@ The poky reference overview
 
 - You can find it here: [https://git.yoctoproject.org](https://git.yoctoproject.org)
 - To download it:
-  - `git clone -b kirkstone https://git.yoctoproject.org/git/poky`
-  - kirkstone is just the actual LTS
+  - `git clone -b wrynose https://git.yoctoproject.org/git/poky`
+  - `wrynose` is the current release (Yocto 6.0, LTS)
 - A new version is released every 6 months and maintained for 7 months.
-- LTS releases are maintained for 4 years.
+- LTS releases are maintained for 4 years (6.0 Wrynose until at least April 2030).
 - Info on release dates and maintenance periods is available on the Yocto website: [https://wiki.yoctoproject.org/wiki/Releases](https://wiki.yoctoproject.org/wiki/Releases)
 
 ---

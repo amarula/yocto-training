@@ -180,7 +180,7 @@ Meeting BitBake tool
 | `bitbake <package> -c devshell` | Open a new shell with the necessary system values already defined for the package |
 | `bitbake <package> -c listtasks` | List all tasks for the package |
 | `bitbake virtual/kernel -c menuconfig` | Interactive kernel configuration |
-| `bitbake <image> -c fetchall` | Fetch sources for a particular image |
+| `bitbake --runall=fetch <image>` | Fetch sources for a particular image |
 | `bitbake-layers show-layers` | Show layers |
 | `bitbake-layers show-recipes "*-image-*"` | Show possible images to bake. Without `"*-images-*"`, it shows ALL recipes |
 | `bitbake -v <yocto image> 2>&1 \| tee image_build.log` | Print (on console) and store verbose baking |
