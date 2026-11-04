@@ -165,7 +165,6 @@ SRCREV = "44c026a73be8038f03dbdeef028b642880cf1511"
 DEPENDS += "lzop-native bc-native"
 COMPATIBLE_MACHINE = "(imx8mp-icore-ctouch2-of10)"
 KBUILD_DEFCONFIG ?= "defconfig"
-S = "${WORKDIR}/git"
 ```
 
 ---

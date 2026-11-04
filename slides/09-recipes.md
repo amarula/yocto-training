@@ -28,7 +28,7 @@ RDEPENDS:${PN} = "busybox"
 SRC_URI = "file://init \
            file://rc.local.sample \
           "
-S = "${WORKDIR}"
+S = "${UNPACKDIR}"
 
 do_configure() {
     :
@@ -40,8 +40,8 @@ do_compile() {
 
 do_install() {
     install -d ${D}${sysconfdir}
-    install -m 0755 ${WORKDIR}/init ${D}
-    install -m 0755 ${WORKDIR}/rc.local.sample ${D}${sysconfdir}
+    install -m 0755 ${S}/init ${D}
+    install -m 0755 ${S}/rc.local.sample ${D}${sysconfdir}
 }
 
 FILES:${PN} = "/init ${sysconfdir}/rc.local.sample"
@@ -64,7 +64,7 @@ Yocto recipes
 - `LIC_FILES_CHKSUM`: defines the license checksum using a URI form.
 - `PR`: package revision. It is usually omitted nowadays; the PR service manages package revisions automatically.
 - `SRC_URI`: is where to download code. This can refer even to a local directory, as in this case, and local files.
-- `S`: is where the source code should be downloaded.
+- `S`: is where the source code is unpacked. For recipes using only local `file://` sources, set `S = "${UNPACKDIR}"`.
 
 ---
 layout: default
@@ -356,7 +356,7 @@ Yocto recipe source tarballs
 ::body::
 
 - When extracting a tarball, BitBake expects to find the extracted files in a directory named `<application>-<version>`. This is controlled by the `S` variable.
-- If the scheme is git, `S` must be set to `${WORKDIR}/git`.
+- For git checkouts, the fetcher unpacks under `${UNPACKDIR}/${BP}` (via `BB_GIT_DEFAULT_DESTSUFFIX`). Only set `S` explicitly when the source lives in a subdirectory.
 
 Let's try an example:
 
@@ -556,7 +556,6 @@ SRCREV = "44c026a73be8038f03dbdeef028b642880cf1511"
 DEPENDS += "lzop-native bc-native"
 COMPATIBLE_MACHINE = "(imx8mp-icore-ctouch2-of10)"
 ..
-S = "${WORKDIR}/git"
 ```
 
 ---
