@@ -69,13 +69,17 @@ src: ./slides/16-system-integration.md
 ---
 
 ---
-src: ./slides/17-license.md
+src: ./slides/17-debugging.md
 ---
 
 ---
-src: ./slides/18-kas.md
+src: ./slides/18-license.md
 ---
 
 ---
-src: ./slides/19-closing.md
+src: ./slides/19-kas.md
+---
+
+---
+src: ./slides/20-closing.md
 ---
