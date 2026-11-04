@@ -59,3 +59,7 @@ src: ./slides/13-devtool.md
 ---
 src: ./slides/14-sdk.md
 ---
+
+---
+src: ./slides/15-license.md
+---
