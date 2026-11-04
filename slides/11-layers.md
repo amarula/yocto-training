@@ -37,7 +37,7 @@ Yocto layers
 <div class="flex flex-col gap-3 max-w-xl mx-auto mt-6 text-center text-xl font-semibold">
   <div class="border-2 border-accent rounded p-4">USEFUL LAYERS</div>
   <div class="border-2 border-accent rounded p-4">LAYERS HARDWARE VENDOR</div>
-  <div class="border-2 border-accent rounded p-4">POKY</div>
+  <div class="border-2 border-accent rounded p-4">OPENEMBEDDED-CORE</div>
   <div class="border-2 border-accent rounded p-4">BSP LAYER</div>
 </div>
 
@@ -47,16 +47,17 @@ layout: default
 
 ::title::
 
-Yocto Poky layers
+Yocto OpenEmbedded-Core layers
 
 ::body::
 
-Poky contains the core layers of Yocto:
+OE-Core contains the core layers:
 
 - `meta`
+- `meta-selftest`
 - `meta-skeleton`
-- `meta-poky`
-- `meta-yocto-bsp`
+
+Additional layers such as `meta-openembedded`, BSP layers and distro layers are separate repositories.
 
 ---
 layout: default
@@ -222,21 +223,21 @@ BSPDIR := "${@os.path.abspath(os.path.dirname(d.getVar('FILE', True)) + '/../..'
 BBFILES ?= ""
 
 BBLAYERS = " \
-  ${BSPDIR}/sources/poky/meta \
-  ${BSPDIR}/sources/poky/meta-poky \
+  ${BSPDIR}/sources/openembedded-core/meta \
   \
   ${BSPDIR}/sources/meta-openembedded/meta-oe \
   ${BSPDIR}/sources/meta-openembedded/meta-multimedia \
   ${BSPDIR}/sources/meta-openembedded/meta-python \
+  ${BSPDIR}/sources/meta-openembedded/meta-networking \
   \
   ${BSPDIR}/sources/meta-freescale \
   ${BSPDIR}/sources/meta-freescale-3rdparty \
   ${BSPDIR}/sources/meta-freescale-distro \
-  ${BSPDIR}/sources/meta-qt5 \
+  ${BSPDIR}/sources/meta-qt6 \
 "
 ```
 
-It uses a trick to get the information we need. `BBPATH` is the file where we can find configuration information.
+It uses a trick to derive the source directory from the location of `bblayers.conf`. `BBPATH` tells BitBake where to find configuration files.
 
 ---
 layout: default
@@ -282,7 +283,7 @@ Yocto Distro layers
 ::body::
 
 - You can create a new distribution by using a distro layer.
-- This allows changing the defaults that are provided by openembedded-core or poky.
+- This allows changing the defaults that are provided by openembedded-core.
 - It is useful to distribute changes that have been made in `local.conf`.
 
 ---

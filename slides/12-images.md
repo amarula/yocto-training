@@ -21,7 +21,7 @@ The final goal of Yocto is to produce images for the target. How can this be ach
 
 - An image is the top-level recipe and is used alongside the machine definition.
 - Whereas the machine describes the hardware used and its capabilities, the image is architecture-agnostic and defines how the root filesystem is built, with what packages.
-- By default, several images are provided in Poky:
+- By default, several images are provided in openembedded-core:
   - `meta*/recipes*/images/*.bb`
 
 ---

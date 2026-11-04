@@ -35,7 +35,7 @@ How to setup environment (1 / 3)
 
 - All the build files are organized in a specific build directory.
 - Any build does not touch anything we have downloaded from the internet.
-- Don't apply any change to poky core or any layer that is used by you.
+- Don't apply any change to OE-Core or any layer that is used by you.
 - You need only to use a script to define where you want your system to be built.
 - `oe-init-build-env` is used to define the environment and set the build directory.
 
@@ -52,10 +52,16 @@ How to setup environment (2 / 3)
 `oe-init-build-env` needs to be sourced in order to start:
 
 ```bash
-source ./oe-init-build-env [builddir]
+source openembedded-core/oe-init-build-env [builddir] [bitbakedir]
 ```
 
-After the file is sourced, you'll land in the `[builddir]`. The build directory already contains the basic Yocto Project structure. If the build directory is missing, the default build directory is built.
+For an OE-Core checkout next to BitBake:
+
+```bash
+source openembedded-core/oe-init-build-env build bitbake
+```
+
+After the file is sourced, you'll land in `[builddir]`. The build directory already contains the basic OpenEmbedded structure. If the build directory is missing, the default build directory is created.
 
 After you source the environment, all the `bitbake*` family commands will be available in the console.
 
@@ -160,6 +166,7 @@ Let's start from `local.conf`. This file contains a lot of variables that can be
 - `BB_NUMBER_THREADS`: how many tasks BitBake should perform in parallel. Defaults to the number of CPU threads on the system. (Note: if you use your laptop, set it to a number of threads that does not burn your machine.)
 - `PARALLEL_MAKE`: how many processes should be used when compiling. The default is the number of CPUs (e.g. `-j 7`).
 - `MACHINE`: the machine the target is built for, e.g. `imx8mp-icore`.
+- `DISTRO`: the distribution policy. With OE-Core it defaults to `nodistro`; a product normally selects a custom distro layer.
 
 ---
 layout: default
@@ -171,10 +178,12 @@ Let's start to build our image
 
 ::body::
 
-What is needed? Suppose that we have a project that we'd like to build. The easiest target is something already in the Yocto poky project, e.g. an emulation target.
+What is needed? Suppose that we have a project that we'd like to build. The easiest target is something already in OE-Core, e.g. an emulation target.
 
 ```bash
-source poky/oe-init-build-env
+git clone https://git.openembedded.org/bitbake
+git clone -b wrynose https://git.openembedded.org/openembedded-core
+source openembedded-core/oe-init-build-env build bitbake
 bitbake core-image-minimal
 ```
 
@@ -186,15 +195,13 @@ Build Configuration:
 BB_VERSION           = "2.18.0"
 BUILD_SYS            = "x86_64-linux"
 NATIVELSBSTRING      = "ubuntu-24.04"
-TARGET_SYS           = "x86_64-poky-linux"
+TARGET_SYS           = "x86_64-oe-linux"
 MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "6.0.4"
+DISTRO               = "nodistro"
+DISTRO_VERSION       = "nodistro.0"
 TUNE_FEATURES        = "m64 core2"
 TARGET_FPU           = ""
-meta
-meta-poky
-meta-yocto-bsp       = "wrynose:79b6d87030178bed0088ad3b00aa6dfbabac37c4"
+meta                 = "wrynose:ae5a301091f5b0574ea7444aab40b309b6d9f3f2"
 ```
 
 ---
@@ -215,13 +222,18 @@ sudo apt install gawk wget git diffstat unzip texinfo gcc build-essential \
 sudo locale-gen en_US.UTF-8
 ```
 
-Those packages are used for building a real platform.
+Those packages are used for building a real platform. Alternatively, `kas-container` can provide a controlled build environment.
+
+The recommended way to set up the training project is KAS: it fetches all repositories and generates `local.conf` and `bblayers.conf`.
 
 ```bash
-git clone -b wrynose https://git.yoctoproject.org/git/poky
-. ./poky/oe-init-build-env
-bitbake core-image-full-cmdline
+pipx install kas
+git clone <training-project-url>
+cd <training-project>
+kas build kas/yocto-training.yml
 ```
+
+The KAS chapter later explains the configuration file in detail.
 
 ---
 layout: default
@@ -233,8 +245,16 @@ Let's run our build
 
 ::body::
 
+From the manual build directory:
+
 ```bash
 runqemu qemux86-64 core-image-full-cmdline
+```
+
+With KAS:
+
+```bash
+kas shell kas/yocto-training.yml -c 'runqemu qemux86-64 core-image-full-cmdline'
 ```
 
 The command, after prompting for the root password, will run a QEMU instance in a window and allow it to operate in a QEMU-KVM execution environment.

@@ -20,8 +20,8 @@ Yocto recipes
 Let's start with a simple example and start from there:
 
 ```text
-SUMMARY = "Poky-tiny init"
-DESCRIPTION = "Basic init system for poky-tiny"
+SUMMARY = "Simple init script"
+DESCRIPTION = "Minimal init system used in the training image"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 RDEPENDS:${PN} = "busybox"
@@ -222,7 +222,7 @@ Let's dive a bit. `FILESPATH` covers even files needed to generate package patch
   - `${FILE_DIRNAME}` is the directory containing the `.bb` file
 - The overrides in `FILESOVERRIDES`:
   - Set as `${TRANSLATED_TARGET_ARCH}:${MACHINEOVERRIDES}:${DISTROOVERRIDES}`
-  - E.g. `arm:armv7a:ti-soc:ti33x:beaglebone:poky`
+  - E.g. `arm:armv7a:ti-soc:ti33x:beaglebone:nodistro`
   - Applied right to left
 
 ---
@@ -245,7 +245,7 @@ SRC_URI += "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.tar.xz \
            "
 ```
 
-More examples can be found just using `git grep` under poky and looking for `SRC_URI`.
+More examples can be found just using `git grep` under openembedded-core and meta-openembedded and looking for `SRC_URI`.
 
 ---
 layout: default
@@ -365,7 +365,7 @@ bitbake gdb -> what are you expecting from this command?
 bitbake -c devshell gdb -> what are you expecting from this command?
 ```
 
-The workdir of this command is: `build/tmp/work/core2-64-poky-linux/gdb/17.2-r0/gdb-17.2`
+The workdir of this command is: `build/tmp/work/core2-64-oe-linux/gdb/17.2-r0/gdb-17.2`
 
 ---
 layout: default
@@ -599,4 +599,4 @@ Yocto recipe patches (4 / 4)
 - It has two valid values:
   - `noop` -> fail on conflicts
   - `user` -> ask the user to fix it
-- By default, `PATCHRESOLVE = "noop"` in `meta-poky`.
+- By default, `PATCHRESOLVE = "noop"` in OE-Core (`meta/conf/bitbake.conf`).

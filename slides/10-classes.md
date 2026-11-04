@@ -35,7 +35,7 @@ Yocto classes
 
 ::body::
 
-Poky provides a huge number of classes under `meta/classes`. What can a class implement? Just a few examples:
+OE-Core provides classes under `meta/classes-recipe`, `meta/classes-global` and `meta/classes`. What can a class implement? Just a few examples:
 
 - `cmake.bbclass`
 - `autotools.bbclass`

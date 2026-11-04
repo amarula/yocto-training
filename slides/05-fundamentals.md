@@ -91,16 +91,17 @@ layout: default
 
 ::title::
 
-Yocto fundamentals: Poky
+Yocto fundamentals: OpenEmbedded-Core
 
 ::body::
 
 - We need a way to organize all the core parts and download them.
-- Poky is the git repository that organizes all the core components like: openembedded-core, yocto-docs and meta-yocto.
-- Poky is also the reference distro provided by the Yocto Project.
-- meta-poky is the reference distribution.
-
-[https://git.yoctoproject.org/poky/](https://git.yoctoproject.org/poky/)
+- OpenEmbedded-Core (OE-Core) is the metadata layer that contains the core recipes, classes and machine configurations.
+- BitBake is a separate repository; together they form the OpenEmbedded build system.
+- OE-Core is distro-less: `DISTRO` defaults to `nodistro`, and `MACHINE = "qemux86-64"` is an emulated target.
+- Repositories:
+  - [https://git.openembedded.org/openembedded-core/](https://git.openembedded.org/openembedded-core/)
+  - [https://git.openembedded.org/bitbake/](https://git.openembedded.org/bitbake/)
 
 ---
 layout: default
@@ -120,17 +121,18 @@ layout: default
 
 ::title::
 
-The poky reference overview
+The OpenEmbedded-Core reference overview
 
 ::body::
 
-- You can find it here: [https://git.yoctoproject.org](https://git.yoctoproject.org)
-- To download it:
-  - `git clone -b wrynose https://git.yoctoproject.org/git/poky`
-  - `wrynose` is the current release (Yocto 6.0, LTS)
+- Repositories:
+  - `git clone -b wrynose https://git.openembedded.org/openembedded-core`
+  - `git clone -b 2.18 https://git.openembedded.org/bitbake`
+- `wrynose` is the current release (Yocto 6.0, LTS).
 - A new version is released every 6 months and maintained for 7 months.
 - LTS releases are maintained for 4 years (6.0 Wrynose until at least April 2030).
 - Info on release dates and maintenance periods is available on the Yocto website: [https://wiki.yoctoproject.org/wiki/Releases](https://wiki.yoctoproject.org/wiki/Releases)
+- Layers can be found on the layer index: [https://layers.openembedded.org](https://layers.openembedded.org)
 
 ---
 layout: default
@@ -138,31 +140,25 @@ layout: default
 
 ::title::
 
-The poky source code organization
+The OpenEmbedded-Core source organization
 
 ::body::
 
 ```text
-poky$ tree -L 1
+openembedded-core$ tree -L 1
 .
-├── bitbake
-├── contrib
-├── documentation
 ├── meta
-├── meta-poky
 ├── meta-selftest
 ├── meta-skeleton
-├── meta-yocto-bsp
+├── oe-init-build-env
 └── scripts
 ```
 
-- `bitbake` holds scripts used by the BitBake command-line tools.
-- `documentation` holds all the Yocto Project docs, including the way to generate PDF or HTML.
-- `meta` contains the openembedded-core metadata.
-- `meta-skeleton` contains recipes for BSP and kernel development.
-- `meta-poky` holds the configuration of the poky reference distribution.
-- `meta-yocto-bsp` contains the configuration of Yocto reference hardware boards.
-- `scripts` contains all you need to set up the environment and build tools.
+- `meta` contains the core metadata: recipes, classes, machine and distro configuration.
+- `meta-selftest` contains recipes and classes used by the build system self-tests.
+- `meta-skeleton` contains example recipes for BSP and kernel development.
+- `scripts` contains helper scripts, including `devtool` and `oe-init-build-env`.
+- `bitbake` is a separate repository, cloned next to OE-Core or fetched by KAS.
 
 ---
 layout: default
@@ -170,12 +166,12 @@ layout: default
 
 ::title::
 
-The poky documentation
+The Yocto documentation
 
 ::body::
 
 - During the course please always refer to the official Yocto documentation: [https://docs.yoctoproject.org/](https://docs.yoctoproject.org/) and [https://docs.yoctoproject.org/singleindex.html](https://docs.yoctoproject.org/singleindex.html)
 - There you can find all you need; it is a very complete resource.
-- When you need an example of a recipe, please navigate the poky project and the meta layers.
+- When you need an example of a recipe, browse openembedded-core and meta-openembedded.
 - The Yocto Project is very well documented and provides a lot of examples.
 - The more you study the code in the Yocto Project, the less you'll need Stack Overflow answers.
