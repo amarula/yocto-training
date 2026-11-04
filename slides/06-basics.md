@@ -251,13 +251,13 @@ labs/
 ├── kas/qemu.yml          # QEMU build
 ├── kas/imx8mp.yml        # i.MX8M Plus board build
 ├── meta-training/        # training layer
-├── labs/                 # step-by-step exercises
+├── exercises/            # step-by-step exercises
 └── scripts/check-lab.sh  # validation
 ```
 
 - `./kas.sh build kas/qemu.yml` builds `training-image`
 - `./kas.sh shell kas/qemu.yml -c 'runqemu qemux86-64 training-image'` boots it
-- `labs/00-setup.md`, `labs/01-build-and-run.md` and `labs/02-inspect-build.md` are the first exercises
+- `labs/exercises/00-setup.md`, `labs/exercises/01-build-and-run.md` and `labs/exercises/02-inspect-build.md` are the first exercises
 - `./scripts/check-lab.sh` validates the result
 
 ---

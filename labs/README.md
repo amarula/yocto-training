@@ -56,18 +56,18 @@ the real board.
 
 | Lab | Topic |
 | --- | --- |
-| `labs/00-setup.md` | Install KAS, fetch layers, inspect the resolved configuration |
-| `labs/01-build-and-run.md` | Build the image and boot it in QEMU |
-| `labs/02-inspect-build.md` | Explore the build directory, metadata and task graph |
-| `labs/03-variables.md` | Variables, overrides and `bitbake -e` (planned) |
-| `labs/04-hello-recipe.md` | Write and package a recipe (planned) |
-| `labs/05-layer-and-bbappend.md` | Create a layer and a `.bbappend` (planned) |
-| `labs/06-devtool.md` | Modify, patch and finish a recipe with devtool (planned) |
-| `labs/07-image-and-wic.md` | Customize the image and the WIC layout (planned) |
-| `labs/08-kernel-fragment.md` | Add a kernel configuration fragment (planned) |
-| `labs/09-sdk.md` | Build and use the SDK/eSDK (planned) |
-| `labs/10-systemd-service.md` | Add a systemd service (planned) |
-| `labs/11-capstone.md` | Build a complete custom image (planned) |
+| `exercises/00-setup.md` | Install KAS, fetch layers, inspect the resolved configuration |
+| `exercises/01-build-and-run.md` | Build the image and boot it in QEMU |
+| `exercises/02-inspect-build.md` | Explore the build directory, metadata and task graph |
+| `exercises/03-variables.md` | Variables, overrides and `bitbake -e` (planned) |
+| `exercises/04-hello-recipe.md` | Write and package a recipe (planned) |
+| `exercises/05-layer-and-bbappend.md` | Create a layer and a `.bbappend` (planned) |
+| `exercises/06-devtool.md` | Modify, patch and finish a recipe with devtool (planned) |
+| `exercises/07-image-and-wic.md` | Customize the image and the WIC layout (planned) |
+| `exercises/08-kernel-fragment.md` | Add a kernel configuration fragment (planned) |
+| `exercises/09-sdk.md` | Build and use the SDK/eSDK (planned) |
+| `exercises/10-systemd-service.md` | Add a systemd service (planned) |
+| `exercises/11-capstone.md` | Build a complete custom image (planned) |
 
 ## Validate a completed lab
 
